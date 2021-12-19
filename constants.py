@@ -24,6 +24,4 @@ ANIMATION_JUMP_LEFT = [('data/jl.png', 0.1)]
 ANIMATION_JUMP_RIGHT = [('data/jr.png', 0.1)]
 ANIMATION_JUMP = [('data/j.png', 0.1)]
 ANIMATION_STAY = [('data/0.png', 0.1)]
-NAME = 'CIGAN'  # IZMENIT!!!!!
-# NA VSYAKIY , NE ZABYD IZMENIT
-# ESLI ZABYDESH, MAT EBAL!
+NAME = 'CIGAN'  
