@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+import game_parametrs
 
 pygame.init()
 size = width, height = 1000, 600
@@ -30,6 +31,7 @@ def authorization(screen):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                exit(0)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
                     name += "a"
@@ -85,7 +87,10 @@ def authorization(screen):
                     name += " "
                 elif event.key == pygame.K_RETURN:
                     screen.fill((0, 0, 0))
-                    return name
+                    game_parametrs.name = name
+                    name_to_txt(name)
+                    game_parametrs.what_to_draw = "level_menu"
+                    return
                 elif event.key == pygame.K_v:
                     name += "v"
                 elif event.key == pygame.K_i:
@@ -119,7 +124,7 @@ def name_to_txt(name):
         if name not in all_players and name:
             file.write(f"{name}: 1\n")
             all_players[name] = 1
-    return all_players[name]
+    game_parametrs.level = all_players[name]
 
 
 def draw_level_menu(screen, level, name):
@@ -174,11 +179,13 @@ def draw_level_menu(screen, level, name):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                exit(0)
             j = 0
             for i in all_icons:
                 if event.type == pygame.MOUSEBUTTONDOWN and \
-                        i.rect.collidepoint(event.pos):
-                    print(j + 1)
+                        i.rect.collidepoint(event.pos) and event.button == 1:
+                    game_parametrs.level = j + 1
+                    game_parametrs.what_to_draw = "level"
                     return
                 j += 1
         all_icons.draw(screen)

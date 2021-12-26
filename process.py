@@ -77,5 +77,5 @@ def process_game(lvl):
         clock.tick(FPS)
 
 
-if __name__ == '__main__':
-    process_game()
+# if __name__ == '__main__':
+#     process_game()
