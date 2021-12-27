@@ -6,6 +6,7 @@ import game_parametrs
 pygame.init()
 size = width, height = 1000, 600
 screen = pygame.display.set_mode(size)
+all_icons = pygame.sprite.Group()
 
 
 def load_image(name, colorkey=None):
@@ -24,11 +25,13 @@ image = load_image("enter_photo.jpg")
 def authorization(screen):
     global image
     name = ""
+    g = "Введите всой ник"
     font = pygame.font.Font('fonts/SuperMario256.ttf', 40)
     font1 = pygame.font.Font('fonts/SuperMario256.ttf', 25)
     running = True
     while running:
         for event in pygame.event.get():
+            g += ""
             if event.type == pygame.QUIT:
                 running = False
                 exit(0)
@@ -97,7 +100,8 @@ def authorization(screen):
                     name += "i"
 
         text = font.render(name, True, (0, 0, 0))
-        description = font1.render("Напишите свой ник", True, (0, 0, 0))
+        description = font1.render("Enter your name\n"
+                                   "And press 'Enter' button ", True, (0, 0, 0))
         x = width // 2 - description.get_width() // 2
         y = 150
         text_x = width // 2 - text.get_width() // 2
@@ -109,9 +113,13 @@ def authorization(screen):
         screen.blit(image1, (0, 0))
         screen.blit(text, (text_x, text_y))
         screen.blit(description, (x, y))
-        pygame.draw.rect(screen, (0, 0, 0), (text_x - 10, text_y - 10,
-                                             text_w + 20, text_h + 20), 3)
-        pygame.display.flip()
+        if text_w <= 300:
+            pygame.draw.rect(screen, (0, 0, 0), (350, text_y - 10,
+                                                 300, text_h + 20), 3)
+        else:
+            pygame.draw.rect(screen, (0, 0, 0), (text_x - 10, text_y - 10,
+                                                text_w + 20, text_h + 20), 3)
+        pygame.display.update()
     pygame.quit()
 
 
@@ -127,7 +135,8 @@ def name_to_txt(name):
     game_parametrs.level = all_players[name]
 
 
-def draw_level_menu(screen, level, name):
+def draw_levels(screen, level):
+    global all_icons
     k = 100
     x = 200
     n = 75
@@ -155,7 +164,6 @@ def draw_level_menu(screen, level, name):
             icon.rect.x = k + (k * i) + (x * i)
             icon.rect.y = n
         screen.blit(text, (k + (k * i) + (x * i), n + 10))
-
     for i in range(3):
         text = font.render(f"level {i + 4}", True, (0, 0, 0))
         if level >= i + 4:
@@ -174,6 +182,9 @@ def draw_level_menu(screen, level, name):
             icon.rect.y = n + m + y
         screen.blit(text, (k + (k * i) + (x * i), n + m + y + 10))
 
+
+def draw_level_menu(screen, level, name):
+    global all_icons
     running = True
     while running:
         for event in pygame.event.get():
@@ -188,6 +199,7 @@ def draw_level_menu(screen, level, name):
                     game_parametrs.what_to_draw = "level"
                     return
                 j += 1
+        draw_levels(screen, level)
         all_icons.draw(screen)
         pygame.display.flip()
     pygame.quit()
