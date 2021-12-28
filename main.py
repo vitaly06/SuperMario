@@ -1,6 +1,5 @@
 import pygame
 from funks_to_draw import *
-from menu import *
 from constants import *
 from process import *
 import game_parametrs
