@@ -10,7 +10,7 @@ all_icons = pygame.sprite.Group()
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
+    fullname = os.path.join('../data', name)
     # если файл не существует, то выходим
     if not os.path.isfile(fullname):
         print(f"Файл с изображением '{fullname}' не найден")
@@ -26,8 +26,8 @@ def authorization(screen):
     global image
     name = ""
     g = "Введите всой ник"
-    font = pygame.font.Font('fonts/SuperMario256.ttf', 40)
-    font1 = pygame.font.Font('fonts/SuperMario256.ttf', 25)
+    font = pygame.font.Font('../fonts/SuperMario256.ttf', 40)
+    font1 = pygame.font.Font('../fonts/SuperMario256.ttf', 25)
     running = True
     while running:
         for event in pygame.event.get():
@@ -125,7 +125,7 @@ def authorization(screen):
 
 def name_to_txt(name):
     all_players = dict()
-    with open("players.txt", "r+") as file:
+    with open("../players.txt", "r+") as file:
         for i in file:
             i = i.split(":")
             all_players[i[0]] = int(i[1])
@@ -146,7 +146,7 @@ def draw_levels(screen, level):
     image = pygame.transform.scale(load_image("nebo.jpg"), (1000, 600))
     screen.blit(image, (0, 0))
     all_icons = pygame.sprite.Group()
-    font = pygame.font.Font('fonts/SuperMario256.ttf', 15)
+    font = pygame.font.Font('../fonts/SuperMario256.ttf', 15)
     for i in range(3):
         text = font.render(f"level {i + 1}", True, (0, 0, 0))
         if level >= i + 1:
@@ -206,7 +206,7 @@ def draw_level_menu(screen, level, name):
 
 
 pos = 'up'  # где находится стрелка
-bg = pygame.image.load('data/bg_menu.jpg')  # фон меню
+bg = pygame.image.load('../data/bg_menu.jpg')  # фон меню
 text_x1, textwidth1, textheight1, text_y1 = 0, 0, 0, 0  # координаты текста
 text_x2, textwidth2, textheight2, text_y2 = 0, 0, 0, 0
 enter = False
@@ -243,14 +243,14 @@ def draw(screen, width, height, lvl):
     global pos, bg, enter
     global text_x1, text_x2, textwidth1, textwidth2, textheight1, textheight2, text_y2, text_y1
     # текст
-    font = pygame.font.Font('fonts/SuperMario256.ttf', 50)
+    font = pygame.font.Font('../fonts/SuperMario256.ttf', 50)
     text1 = font.render('START', True, pygame.Color('black'))
     text2 = font.render('EXIT', True, pygame.Color('black'))
     text_x1 = width // 2 - text1.get_width() // 2
     text_y1 = height // 3
     text_x2 = width // 2 - text2.get_width() // 2
     text_y2 = height // 1.5
-    title_font = pygame.font.Font('fonts/SuperMario256.ttf', 100)
+    title_font = pygame.font.Font('../fonts/SuperMario256.ttf', 100)
     title = font.render('SUPER MARIO', True, pygame.Color('black'))
     title_x1 = width // 2 - title.get_width() // 2
     title_y1 = height // 15
@@ -259,7 +259,7 @@ def draw(screen, width, height, lvl):
     textheight1, textheight2 = text1.get_height(), text2.get_height()
 
     # работа со стрелочкой
-    arr = pygame.image.load('data/red_arrow.png')
+    arr = pygame.image.load('../data/red_arrow.png')
     key = pygame.key.get_pressed()
     screen2 = pygame.display.set_mode((width, height))
     screen2.blit(bg, (0, 0))

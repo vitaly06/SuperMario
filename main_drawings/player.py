@@ -1,5 +1,5 @@
 import pygame
-import constants
+from main_drawings import constants
 
 
 class Player(pygame.sprite.Sprite):
@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 0
         self.x = x
         self.y = y
-        self.image = pygame.image.load('data/0.png')
+        self.image = pygame.image.load('../data/0.png')
         self.rect = pygame.Rect(x, y, 22, 32)  # прямоугольный объект
         self.speed_y = 0  # вертикальная скорость
         self.onGround = False  # находится ли игрок на земле

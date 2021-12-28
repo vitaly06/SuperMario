@@ -1,7 +1,7 @@
 import pygame
-from constants import *
-from player import Player
-from blocks import Platform, LuckyBox
+from main_drawings.constants import *
+from main_drawings.player import Player
+from main_drawings.blocks import Platform, LuckyBox
 
 
 def process_game(lvl):

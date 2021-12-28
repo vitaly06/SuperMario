@@ -1,5 +1,5 @@
 import pygame, sys
-from constants import *
+from main_drawings.constants import *
 
 pygame.init()
 screen = pygame.display.set_mode(SIZE)

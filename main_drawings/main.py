@@ -1,8 +1,6 @@
-import pygame
-from funks_to_draw import *
-from constants import *
+from main_drawings.funks_to_draw import *
 from process import *
-import game_parametrs
+from main_drawings import game_parametrs
 
 
 def main():
