@@ -1,5 +1,5 @@
 import pygame
-from reg import *
+from funks_to_draw import *
 from menu import *
 from constants import *
 from process import *
