@@ -15,10 +15,9 @@ class Player(pygame.sprite.Sprite):
 
     def update(self, left, right, up, platforms):
         if up:
-            print(1)
             if self.onGround:
-                print(2)
                 self.speed_y = -constants.JUMP_POWER
+                self.onGround = False
         if left:
             self.speed = -constants.SPEED
         if right:
@@ -31,7 +30,6 @@ class Player(pygame.sprite.Sprite):
         self.collide(self.speed, 0, platforms)
         self.rect.y += self.speed_y
         self.collide(0, self.speed_y, platforms)
-        self.onGround = False
 
     def collide(self, speed_x, speed_y, platforms):
         for p in platforms:
