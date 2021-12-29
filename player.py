@@ -17,7 +17,6 @@ class Player(pygame.sprite.Sprite):
         if up:
             if self.onGround:
                 self.speed_y = -constants.JUMP_POWER
-                self.onGround = False
         if left:
             self.speed = -constants.SPEED
         if right:
@@ -26,6 +25,7 @@ class Player(pygame.sprite.Sprite):
             self.speed = 0
         if not self.onGround:
             self.speed_y += constants.GRAVITY
+        self.onGround = False
         self.rect.x += self.speed
         self.collide(self.speed, 0, platforms)
         self.rect.y += self.speed_y
