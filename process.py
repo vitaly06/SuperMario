@@ -37,8 +37,23 @@ def process_game(lvl):
         "-                   --      ----",
         "-                          -----",
         "--------------------------------"]
+    x = y = 0  # координаты
+    for row in level:  # вся строка
+        for col in row:  # каждый символ
+            if col == "-":
+                # создаем блок, заливаем его цветом и рисеум его
+                pf = Platform(x, y)
+                entities.add(pf)
+                platforms.append(pf)
+            if col == '?':
+                lb = LuckyBox(x, y)
+                entities.add(lb)
+                platforms.append(lb)
+            x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
+        y += PLATFORM_HEIGHT  # то же самое и с высотой
+        x = 0
     while running:
-        screen.fill((0, 0, 0))
+        screen.fill(pygame.Color('green'))
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 exit()
@@ -55,22 +70,6 @@ def process_game(lvl):
                 right = False
             if e.type == pygame.KEYUP and e.key == pygame.K_LEFT:
                 left = False
-
-        x = y = 0  # координаты
-        for row in level:  # вся строка
-            for col in row:  # каждый символ
-                if col == "-":
-                    # создаем блок, заливаем его цветом и рисеум его
-                    pf = Platform(x, y)
-                    entities.add(pf)
-                    platforms.append(pf)
-                if col == '?':
-                    lb = LuckyBox(x, y)
-                    entities.add(lb)
-                    platforms.append(lb)
-                x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
-            y += PLATFORM_HEIGHT  # то же самое и с высотой
-            x = 0
         player.update(left, right, up, platforms)
         entities.draw(screen)
         pygame.display.flip()
