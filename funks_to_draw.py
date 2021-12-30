@@ -7,6 +7,7 @@ pygame.init()
 size = width, height = 1000, 600
 screen = pygame.display.set_mode(size)
 all_icons = pygame.sprite.Group()
+pygame.display.set_caption('Super Mario')
 
 
 def load_image(name, colorkey=None):

@@ -7,7 +7,7 @@ from blocks import Platform, LuckyBox
 def process_game(lvl):
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
-    pygame.display.set_caption('Марио!')
+    pygame.display.set_caption('Super Mario')
 
     running = True
     clock = pygame.time.Clock()

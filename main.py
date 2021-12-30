@@ -9,6 +9,7 @@ def main():
     pygame.init()
     size = WIDTH, HEIGHT
     screen = pygame.display.set_mode(size)
+    pygame.display.set_caption('Super Mario')
     while True:
         if game_parametrs.what_to_draw == "start":
             authorization(screen)

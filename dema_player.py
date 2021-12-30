@@ -4,6 +4,7 @@ from constants import *
 pygame.init()
 screen = pygame.display.set_mode(SIZE)
 clock = pygame.time.Clock()
+pygame.display.set_caption('Super Mario')
 
 
 while True:
