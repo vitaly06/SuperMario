@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 import pyganim
-
+import blocks
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -87,3 +87,13 @@ class Player(pygame.sprite.Sprite):
                 if speed_y < 0:  # если движется вверх
                     self.rect.top = p.rect.bottom  # то не движется вверх
                     self.speed_y = 0  # и энергия прыжка пропадает
+                if isinstance(p, blocks.BlockDie):  # если пересакаемый блок - blocks.BlockDie
+                    self.die()  # умираем
+
+    def die(self):
+        pygame.time.wait(500)
+        self.teleporting(self.x, self.y)  # перемещаемся в начальные координаты
+
+    def teleporting(self, goX, goY):
+        self.rect.x = goX
+        self.rect.y = goY

@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 from player import Player
-from blocks import Platform, LuckyBox
+from blocks import Platform, LuckyBox, BlockDie
 
 
 class Camera(object):
@@ -55,6 +55,10 @@ def process_game(lvl):
                 lb = LuckyBox(x, y)
                 entities.add(lb)
                 platforms.append(lb)
+            if col == "*":
+                bd = BlockDie(x, y)
+                entities.add(bd)
+                platforms.append(bd)
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
         y += PLATFORM_HEIGHT  # то же самое и с высотой
         x = 0
