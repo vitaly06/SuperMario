@@ -5,6 +5,7 @@ PLATFORM_HEIGHT = 32
 PLATFORM_COLOR = "#FF6262"
 SPEED = 5
 JUMP_POWER = 10
+COLOR = "#888888"
 GRAVITY = 0.35
 PLATFORM_WIDTH = 32
 PLATFORM_HEIGHT = 32
@@ -24,3 +25,30 @@ ANIMATION_JUMP_LEFT = [('data/jl.png', 0.1)]
 ANIMATION_JUMP_RIGHT = [('data/jr.png', 0.1)]
 ANIMATION_JUMP = [('data/j.png', 0.1)]
 ANIMATION_STAY = [('data/0.png', 0.1)]
+LEVELS = {
+    1:
+        ["----------------------------------",
+         "-                                -",
+         "-                       --       -",
+         "-                                -",
+         "-            --                  -",
+         "-                                -",
+         "--                               -",
+         "-                                -",
+         "-                   ----     --- -",
+         "-                                -",
+         "--                               -",
+         "-                                -",
+         "-                            --- -",
+         "-                                -",
+         "-                                -",
+         "-      ---                       -",
+         "-                                -",
+         "-   -------         ----         -",
+         "-                                -",
+         "-                         -      -",
+         "-                            --  -",
+         "-                                -",
+         "-                                -",
+         "----------------------------------"]
+}
