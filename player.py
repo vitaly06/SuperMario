@@ -1,5 +1,6 @@
 import pygame
-import constants
+from constants import *
+import pyganim
 
 
 class Player(pygame.sprite.Sprite):
@@ -16,15 +17,15 @@ class Player(pygame.sprite.Sprite):
     def update(self, left, right, up, platforms):
         if up:
             if self.onGround:
-                self.speed_y = -constants.JUMP_POWER
+                self.speed_y = -JUMP_POWER
         if left:
-            self.speed = -constants.SPEED
+            self.speed = -SPEED
         if right:
-            self.speed = constants.SPEED
+            self.speed = SPEED
         if not (left or right):
             self.speed = 0
         if not self.onGround:
-            self.speed_y += constants.GRAVITY
+            self.speed_y += GRAVITY
         self.onGround = False
         self.rect.x += self.speed
         self.collide(self.speed, 0, platforms)
