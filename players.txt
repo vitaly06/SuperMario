@@ -10,3 +10,11 @@ mat ebal: 1
 hhh: 1
 hthf: 1
 hghgfd: 1
+gfd: 1
+gf: 1
+gfdfdg: 1
+g: 1
+gffd: 1
+h: 1
+gg: 1
+f: 1
