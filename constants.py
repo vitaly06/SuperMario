@@ -25,7 +25,7 @@ ANIMATION_JUMP_LEFT = [('data/jl.png', 1)]
 ANIMATION_JUMP_RIGHT = [('data/jr.png', 1)]
 ANIMATION_JUMP = [('data/j.png', 1)]
 ANIMATION_STAY = [('data/0.png', 1)]
-LEVELS = {
+LEVELS = { # levels
     1:
         ["----------------------------------",
          "-                                -",
