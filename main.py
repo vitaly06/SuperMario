@@ -17,6 +17,7 @@ def main():
             draw_level_menu(screen, game_parametrs.level, game_parametrs.name)
         elif game_parametrs.what_to_draw == "level":
             process_game(game_parametrs.level)
+            # check
 
 
 if __name__ == '__main__':
