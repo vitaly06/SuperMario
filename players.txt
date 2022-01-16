@@ -19,3 +19,5 @@ h: 1
 gg: 1
 f: 1
 dema: 1
+dema : 1
+w: 1

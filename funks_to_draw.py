@@ -146,7 +146,7 @@ def name_to_txt(name):
         if name not in all_players and name:
             file.write(f"{name}: 1\n")
             all_players[name] = 1
-    game_parametrs.level = all_players[name]
+    game_parametrs.level = (all_players[name], 50, 50)
 
 
 def draw_levels(screen, level):
@@ -162,6 +162,8 @@ def draw_levels(screen, level):
     screen.blit(image, (0, 0))
     all_icons = pygame.sprite.Group()
     font = pygame.font.Font('fonts/SuperMario256.ttf', 15)
+    level = game_parametrs.level[0]
+    print(level)
     for i in range(3):
         text = font.render(f"level {i + 1}", True, (0, 0, 0))
         if level >= i + 1:
@@ -212,11 +214,12 @@ def draw_level_menu(screen, level, name):
             for i in all_icons:
                 if event.type == pygame.MOUSEBUTTONDOWN and \
                         i.rect.collidepoint(event.pos) and event.button == 1 :
-                    game_parametrs.level = j + 1
-                    if check(game_parametrs.name) >= game_parametrs.level:
+                    if check(game_parametrs.name) >= game_parametrs.level[0]:
+                        game_parametrs.level = (j + 1, 50, 50)
                         game_parametrs.what_to_draw = "level"
                         return
-                j += 1
+                    # print(check(game_parametrs.name), game_parametrs.level[0])
+                    j += 1
         draw_levels(screen, level)
         all_icons.draw(screen)
         for i in level_text:
@@ -232,7 +235,7 @@ text_x2, textwidth2, textheight2, text_y2 = 0, 0, 0, 0
 enter = False
 
 
-def menug(lvl):
+def pause(lvl, x, y):
     global text_x1, text_x2, text_y2, text_y1, textheight2, textheight1, textwidth1, textwidth2, enter
     pygame.init()
     size = width, height = 1000, 600
@@ -240,6 +243,7 @@ def menug(lvl):
     pygame.display.set_caption('меню')
     running = True
     clock = pygame.time.Clock()
+    lvl = game_parametrs.level[0]
     fps = 60
     while running:
         for event in pygame.event.get():
@@ -247,13 +251,19 @@ def menug(lvl):
                 running = False
             if event.type == pygame.MOUSEBUTTONUP:
                 if text_x1 <= event.pos[0] <= text_x1 + textwidth1 and text_y1 <= event.pos[1] <= text_y1 + textheight1:
-                    return lvl  # начать игру
+                    game_parametrs.level = (lvl, x, y)
+                    game_parametrs.what_to_draw = "level"
+                    return
                 if text_x2 <= event.pos[0] <= text_x2 + textwidth2 and text_y2 <= event.pos[1] <= text_y2 + textheight2:
-                    exit()
+                    game_parametrs.what_to_draw = "level_menu"
+                    game_parametrs.level = (lvl, 50, 50)
+                    return
+
             if enter:
                 enter = False
+                game_parametrs.what_to_draw = "level_menu"
                 return lvl
-            game_parametrs.what_to_draw = "level_menu"
+
         draw(screen, width, height, lvl)
         pygame.display.flip()
         clock.tick(fps)

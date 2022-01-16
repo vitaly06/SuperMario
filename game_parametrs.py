@@ -1,3 +1,3 @@
 what_to_draw = "start"
-level = None
+level = (1, 50, 50)
 name = None

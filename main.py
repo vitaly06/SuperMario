@@ -14,9 +14,11 @@ def main():
         if game_parametrs.what_to_draw == "start":
             authorization(screen)
         elif game_parametrs.what_to_draw == "level_menu":
-            draw_level_menu(screen, game_parametrs.level, game_parametrs.name)
+            draw_level_menu(screen, game_parametrs.level[0], game_parametrs.name)
         elif game_parametrs.what_to_draw == "level":
-            process_game(game_parametrs.level)
+            process_game(game_parametrs.level[0], game_parametrs.level[1], game_parametrs.level[2])
+        elif game_parametrs.what_to_draw == "pause":
+            pause(game_parametrs.level[0], game_parametrs.level[1], game_parametrs.level[2])
             # check
 
 

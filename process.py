@@ -1,4 +1,6 @@
 import pygame
+
+import game_parametrs
 from constants import *
 from player import Player
 from blocks import Platform, LuckyBox, BlockDie
@@ -29,14 +31,14 @@ def camera_configure(camera, target_rect):
     return pygame.Rect(l, t, w, h)
 
 
-def process_game(lvl):
+def process_game(lvl, x=50, y=50):
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
     pygame.display.set_caption('Super Mario')
 
     running = True
     clock = pygame.time.Clock()
-    player = Player(50, 50)
+    player = Player(x, y)
     left = right = False
     up = False
     entities = pygame.sprite.Group()
@@ -84,6 +86,10 @@ def process_game(lvl):
                 left = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_RIGHT:
                 right = True
+            if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
+                game_parametrs.what_to_draw = "pause"
+                game_parametrs.level = (lvl, player.x, player.y)
+                return
 
             if e.type == pygame.KEYUP and e.key == pygame.K_UP:
                 up = False
