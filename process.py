@@ -46,9 +46,13 @@ def process_game(lvl):
     x = y = 0  # координаты
     for row in level:  # вся строка
         for col in row:  # каждый символ
-            if col == "-":
+            if col == "-" and lvl != 3:
                 # создаем блок, заливаем его цветом и рисеум его
-                pf = Platform(x, y)
+                pf = Platform(x, y, 'data/platform.png')
+                entities.add(pf)
+                platforms.append(pf)
+            elif lvl == 3 and col == '-':
+                pf = Platform(x, y, 'data/snow_block.jpg')
                 entities.add(pf)
                 platforms.append(pf)
             if col == '?':
@@ -56,7 +60,11 @@ def process_game(lvl):
                 entities.add(lb)
                 platforms.append(lb)
             if col == "*":
-                bd = BlockDie(x, y)
+                bd = BlockDie(x, y, "data/dieBlock.png")
+                entities.add(bd)
+                platforms.append(bd)
+            if col == 'l':
+                bd = BlockDie(x, y, "data/lava.jpg")
                 entities.add(bd)
                 platforms.append(bd)
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков

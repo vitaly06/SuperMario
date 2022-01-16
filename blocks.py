@@ -3,9 +3,9 @@ import pygame
 
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, place):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('data/platform.png')
+        self.image = pygame.image.load(place)
         self.rect = pygame.Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
 
 
@@ -17,6 +17,6 @@ class LuckyBox(pygame.sprite.Sprite):
 
 
 class BlockDie(Platform):
-    def __init__(self, x, y):
-        Platform.__init__(self, x, y)
-        self.image = pygame.image.load("data/dieBlock.png")
+    def __init__(self, x, y, place):
+        Platform.__init__(self, x, y, place)
+        self.image = pygame.image.load(place)
