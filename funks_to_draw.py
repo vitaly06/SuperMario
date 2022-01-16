@@ -9,6 +9,18 @@ screen = pygame.display.set_mode(size)
 all_icons = pygame.sprite.Group()
 pygame.display.set_caption('Super Mario')
 level_text = list()
+pygame.mixer.music.load('data\main_music.mp3')
+pygame.mixer.music.play()
+# sound = pygame.mixer.Sound("main_music.mp3")
+
+
+def check(name):
+    all_players = dict()
+    with open("players.txt", "r") as file:
+        for i in file:
+            i = i.split(":")
+            all_players[i[0]] = int(i[1])
+    return all_players[name]
 
 
 def load_image(name, colorkey=None):
@@ -199,10 +211,11 @@ def draw_level_menu(screen, level, name):
             j = 0
             for i in all_icons:
                 if event.type == pygame.MOUSEBUTTONDOWN and \
-                        i.rect.collidepoint(event.pos) and event.button == 1:
+                        i.rect.collidepoint(event.pos) and event.button == 1 :
                     game_parametrs.level = j + 1
-                    game_parametrs.what_to_draw = "level"
-                    return
+                    if check(game_parametrs.name) >= game_parametrs.level:
+                        game_parametrs.what_to_draw = "level"
+                        return
                 j += 1
         draw_levels(screen, level)
         all_icons.draw(screen)
@@ -240,6 +253,7 @@ def menug(lvl):
             if enter:
                 enter = False
                 return lvl
+            game_parametrs.what_to_draw = "level_menu"
         draw(screen, width, height, lvl)
         pygame.display.flip()
         clock.tick(fps)
