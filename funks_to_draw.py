@@ -275,8 +275,8 @@ def draw(screen, width, height, lvl):
     global text_x1, text_x2, textwidth1, textwidth2, textheight1, textheight2, text_y2, text_y1
     # текст
     font = pygame.font.Font('fonts/SuperMario256.ttf', 50)
-    text1 = font.render('START', True, pygame.Color('black'))
-    text2 = font.render('EXIT', True, pygame.Color('black'))
+    text1 = font.render('RESTART', True, pygame.Color('black'))
+    text2 = font.render('LEVEL MENU', True, pygame.Color('black'))
     text_x1 = width // 2 - text1.get_width() // 2
     text_y1 = height // 3
     text_x2 = width // 2 - text2.get_width() // 2
