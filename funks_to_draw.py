@@ -8,6 +8,7 @@ size = width, height = 1000, 600
 screen = pygame.display.set_mode(size)
 all_icons = pygame.sprite.Group()
 pygame.display.set_caption('Super Mario')
+level_text = list()
 
 
 def load_image(name, colorkey=None):
@@ -137,7 +138,8 @@ def name_to_txt(name):
 
 
 def draw_levels(screen, level):
-    global all_icons
+    global all_icons, level_text
+    level_text = list()
     k = 100
     x = 200
     n = 75
@@ -164,7 +166,8 @@ def draw_levels(screen, level):
             all_icons.add(icon)
             icon.rect.x = k + (k * i) + (x * i)
             icon.rect.y = n
-        screen.blit(text, (k + (k * i) + (x * i), n + 10))
+        # screen.blit(text, (k + (k * i) + (x * i), n + 10))
+        level_text.append((text, k + (k * i) + (x * i), n + 10))
     for i in range(3):
         text = font.render(f"level {i + 4}", True, (0, 0, 0))
         if level >= i + 4:
@@ -181,7 +184,8 @@ def draw_levels(screen, level):
             all_icons.add(icon)
             icon.rect.x = k + (k * i) + (x * i)
             icon.rect.y = n + m + y
-        screen.blit(text, (k + (k * i) + (x * i), n + m + y + 10))
+        # screen.blit(text, (k + (k * i) + (x * i), n + m + y + 10))
+        level_text.append((text, k + (k * i) + (x * i), n + m + y + 10))
 
 
 def draw_level_menu(screen, level, name):
@@ -202,6 +206,8 @@ def draw_level_menu(screen, level, name):
                 j += 1
         draw_levels(screen, level)
         all_icons.draw(screen)
+        for i in level_text:
+            screen.blit(i[0], (i[1], i[2]))
         pygame.display.flip()
     pygame.quit()
 
