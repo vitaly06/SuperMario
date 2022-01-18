@@ -90,6 +90,8 @@ class Player(pygame.sprite.Sprite):
                     self.speed_y = 0  # и энергия прыжка пропадает
                 if isinstance(p, blocks.BlockDie):  # если пересакаемый блок - blocks.BlockDie
                     self.die()  # умираем
+                elif isinstance(p, blocks.Door):
+                    print('COOL')  # ДЁМА СЮДА
 
     def die(self):
         pygame.time.wait(500)

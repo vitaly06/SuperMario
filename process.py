@@ -3,7 +3,7 @@ import pygame
 import game_parametrs
 from constants import *
 from player import Player
-from blocks import Platform, LuckyBox, BlockDie
+from blocks import Platform, LuckyBox, BlockDie, Door
 
 
 class Camera(object):
@@ -69,6 +69,10 @@ def process_game(lvl, x, y):
                 bd = BlockDie(x, y, "data/lava.jpg")
                 entities.add(bd)
                 platforms.append(bd)
+            if col == 'd':
+                door = Door(x, y - 32, 'data/door.png')
+                entities.add(door)
+                platforms.append(door)
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
         y += PLATFORM_HEIGHT  # то же самое и с высотой
         x = 0
