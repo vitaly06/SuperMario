@@ -5,6 +5,18 @@ from process import *
 import game_parametrs
 
 
+def name_to_txt(name):
+    all_players = dict()
+    with open("players.txt", "r+") as file:
+        for i in file:
+            i = i.split(":")
+            all_players[i[0]] = int(i[1])
+        if name not in all_players and name:
+            file.write(f"{name}: 1\n")
+            all_players[name] = 1
+    game_parametrs.level = (all_players[name], 50, 50)
+
+
 def main():
     pygame.init()
     size = WIDTH, HEIGHT

@@ -9,8 +9,8 @@ screen = pygame.display.set_mode(size)
 all_icons = pygame.sprite.Group()
 pygame.display.set_caption('Super Mario')
 level_text = list()
-pygame.mixer.music.load('data\main_music.mp3')
-pygame.mixer.music.play(loops=-1)
+# pygame.mixer.music.load('data\main_music.mp3')
+# pygame.mixer.music.play(loops=-1)
 # sound = pygame.mixer.Sound("main_music.mp3")
 
 
@@ -213,13 +213,14 @@ def draw_level_menu(screen, level, name):
             j = 0
             for i in all_icons:
                 if event.type == pygame.MOUSEBUTTONDOWN and \
-                        i.rect.collidepoint(event.pos) and event.button == 1 :
+                        i.rect.collidepoint(event.pos) and event.button == 1:
                     if check(game_parametrs.name) >= game_parametrs.level[0]:
+                        print(j)
                         game_parametrs.level = (j + 1, 50, 50)
                         game_parametrs.what_to_draw = "level"
                         return
                     # print(check(game_parametrs.name), game_parametrs.level[0])
-                    j += 1
+                j += 1
         draw_levels(screen, level)
         all_icons.draw(screen)
         for i in level_text:
@@ -249,6 +250,7 @@ def pause(lvl, x, y):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 if text_x1 <= event.pos[0] <= text_x1 + textwidth1 and text_y1 <= event.pos[1] <= text_y1 + textheight1:
                     game_parametrs.level = (lvl, x, y)
@@ -256,7 +258,8 @@ def pause(lvl, x, y):
                     return
                 if text_x2 <= event.pos[0] <= text_x2 + textwidth2 and text_y2 <= event.pos[1] <= text_y2 + textheight2:
                     game_parametrs.what_to_draw = "level_menu"
-                    game_parametrs.level = (lvl, 50, 50)
+                    name_to_txt(game_parametrs.name)
+                    # game_parametrs.level = (lvl, 50, 50)
                     return
 
             if enter:

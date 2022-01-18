@@ -31,7 +31,7 @@ def camera_configure(camera, target_rect):
     return pygame.Rect(l, t, w, h)
 
 
-def process_game(lvl, x=50, y=50):
+def process_game(lvl, x, y):
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
     pygame.display.set_caption('Super Mario')
@@ -88,6 +88,7 @@ def process_game(lvl, x=50, y=50):
                 right = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
                 game_parametrs.what_to_draw = "pause"
+                print(player.x, player.y)
                 game_parametrs.level = (lvl, player.x, player.y)
                 return
 
