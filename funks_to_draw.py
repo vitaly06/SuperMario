@@ -142,7 +142,10 @@ def name_to_txt(name):
     with open("players.txt", "r+") as file:
         for i in file:
             i = i.split(":")
-            all_players[i[0]] = int(i[1])
+            try:
+                all_players[i[0]] = int(i[1])
+            except IndexError:
+                pass
         if name not in all_players and name:
             file.write(f"{name}: 1\n")
             all_players[name] = 1
@@ -162,6 +165,7 @@ def draw_levels(screen, level):
     screen.blit(image, (0, 0))
     all_icons = pygame.sprite.Group()
     font = pygame.font.Font('fonts/SuperMario256.ttf', 15)
+    game_parametrs.level = (check(game_parametrs.name), 50, 50)
     level = game_parametrs.level[0]
     print(level)
     for i in range(3):
@@ -205,6 +209,8 @@ def draw_levels(screen, level):
 def draw_level_menu(screen, level, name):
     global all_icons
     running = True
+    level = check(name)
+    game_parametrs.end_level = False
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -214,8 +220,8 @@ def draw_level_menu(screen, level, name):
             for i in all_icons:
                 if event.type == pygame.MOUSEBUTTONDOWN and \
                         i.rect.collidepoint(event.pos) and event.button == 1:
-                    if check(game_parametrs.name) >= game_parametrs.level[0]:
-                        print(j)
+                    if check(game_parametrs.name) >= j + 1:
+                        # print(j)
                         game_parametrs.level = (j + 1, 50, 50)
                         game_parametrs.what_to_draw = "level"
                         return

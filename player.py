@@ -1,4 +1,5 @@
 import pygame
+import game_parametrs
 from constants import *
 import pyganim
 import blocks
@@ -91,7 +92,23 @@ class Player(pygame.sprite.Sprite):
                 if isinstance(p, blocks.BlockDie):  # если пересакаемый блок - blocks.BlockDie
                     self.die()  # умираем
                 elif isinstance(p, blocks.Door):
-                    print('COOL')  # ДЁМА СЮДА
+                    level = game_parametrs.level[0]
+                    print(level)
+                    all_players = dict()
+                    with open("players.txt", "r+") as file:
+                        for i in file:
+                            i = i.split(":")
+                            all_players[i[0]] = int(i[1])
+                    if level < all_players[game_parametrs.name]:
+                        # game_parametrs.what_to_draw = "level_menu"
+                        pass
+                    else:
+                        all_players[game_parametrs.name] += 1
+                        with open("players.txt", "w") as file:
+                            for i in all_players:
+                                file.write(f"{i}: {all_players[i]} \n")
+                        # game_parametrs.what_to_draw = "level_menu"
+                    game_parametrs.end_level = True
 
     def die(self):
         pygame.time.wait(500)

@@ -6,6 +6,14 @@ from player import Player
 from blocks import Platform, LuckyBox, BlockDie, Door
 
 
+def check(name):
+    all_players = dict()
+    with open("players.txt", "r") as file:
+        for i in file:
+            i = i.split(":")
+            all_players[i[0]] = int(i[1])
+    return all_players[name]
+
 class Camera(object):
     def __init__(self, camera_func, width, height):
         self.camera_func = camera_func
@@ -84,6 +92,11 @@ def process_game(lvl, x, y):
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 exit()
+            if game_parametrs.end_level:
+                game_parametrs.what_to_draw = "level_menu"
+                # game_parametrs.level[0] = check(game_parametrs.name)
+                game_parametrs.level = (lvl, player.x, player.y)
+                return
             if e.type == pygame.KEYDOWN and e.key == pygame.K_UP:
                 up = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_LEFT:

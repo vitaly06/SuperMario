@@ -1,23 +1,2 @@
-ggg: 1
-dema goog: 1
-dema good: 4
-dddd: 1
-bbb: 1
-vitaly: 1
-cigan: 1
-dema pidaras: 1
-mat ebal: 1
-hhh: 1
-hthf: 1
-hghgfd: 1
-gfd: 1
-gf: 1
-gfdfdg: 1
-g: 1
-gffd: 1
-h: 1
-gg: 1
-f: 1
-dema: 1
-dema : 1
-w: 1
+dema: 2 
+god: 2 
