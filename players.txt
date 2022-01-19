@@ -1,3 +1,4 @@
 dema: 2 
 god: 2 
-dema good: 2 
+dema good: 4 
+der: 1 
