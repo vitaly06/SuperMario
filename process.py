@@ -76,6 +76,10 @@ def process_game(lvl, x, y):
                 bd = BlockDie(x, y, "data/lava.jpg")
                 entities.add(bd)
                 platforms.append(bd)
+            if col == 's':
+                bd = BlockDie(x, y, "data/spike.png")
+                entities.add(bd)
+                platforms.append(bd)
             if col == 'd':
                 door = Door(x, y - 32, 'data/door.png')
                 entities.add(door)
