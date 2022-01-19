@@ -91,10 +91,10 @@ def process_game(lvl, x, y):
         # screen.fill(pygame.image.load('data/fon.png'))
         screen.blit(bg, (0, 0))
         while game_parametrs.game_over:
-            #print("говно")
+            # print("говно")
             for j in pygame.event.get():
-                if j == pygame.QUIT:
-                    pygame.quit()
+                if j.type == pygame.QUIT:
+                    exit()
                 # if game_parametrs.game_over == False:
                 #     break
                 restart = pygame.sprite.Sprite()
