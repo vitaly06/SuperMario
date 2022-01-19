@@ -88,13 +88,13 @@ def process_game(lvl, x, y):
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while running:
         print(game_parametrs.game_over)
-        #screen.fill(pygame.image.load('data/fon.png'))
+        # screen.fill(pygame.image.load('data/fon.png'))
         screen.blit(bg, (0, 0))
         while game_parametrs.game_over:
-            print("говно")
+            #print("говно")
             for j in pygame.event.get():
                 if j == pygame.QUIT:
-                    exit()
+                    pygame.quit()
                 # if game_parametrs.game_over == False:
                 #     break
                 restart = pygame.sprite.Sprite()
@@ -118,6 +118,7 @@ def process_game(lvl, x, y):
                         if k == 0:
                             game_parametrs.game_over = False
                             player.teleporting(50, 50)
+                            return
                         elif k == 1:
                             game_parametrs.game_over = False
                             game_parametrs.what_to_draw = "level_menu"
