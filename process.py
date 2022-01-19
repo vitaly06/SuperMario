@@ -1,5 +1,6 @@
 import pygame
 
+from funks_to_draw import *
 import game_parametrs
 from constants import *
 from player import Player
@@ -86,8 +87,43 @@ def process_game(lvl, x, y):
     total_level_height = len(level) * PLATFORM_HEIGHT  # высоту
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while running:
+        print(game_parametrs.game_over)
         #screen.fill(pygame.image.load('data/fon.png'))
         screen.blit(bg, (0, 0))
+        while game_parametrs.game_over:
+            print("говно")
+            for j in pygame.event.get():
+                if j == pygame.QUIT:
+                    exit()
+                # if game_parametrs.game_over == False:
+                #     break
+                restart = pygame.sprite.Sprite()
+                restart.image = pygame.transform.scale(load_image("restart.png"), (400, 120))
+                restart.rect = restart.image.get_rect()
+                restart.rect.x = 300
+                restart.rect.y = 150
+                go_to_level_menu = pygame.sprite.Sprite()
+                go_to_level_menu.image = pygame.transform.scale(load_image("go_to_level_menu.png"), (400, 120))
+                go_to_level_menu.rect = go_to_level_menu.image.get_rect()
+                go_to_level_menu.rect.x = 300
+                go_to_level_menu.rect.y = 360
+                drawing = pygame.sprite.Group()
+                drawing.add(restart)
+                drawing.add(go_to_level_menu)
+                drawing.draw(screen)
+                k = 0
+                for i in drawing:
+                    if j.type == pygame.MOUSEBUTTONDOWN and \
+                            i.rect.collidepoint(j.pos) and j.button == 1:
+                        if k == 0:
+                            game_parametrs.game_over = False
+                            player.teleporting(50, 50)
+                        elif k == 1:
+                            game_parametrs.game_over = False
+                            game_parametrs.what_to_draw = "level_menu"
+                            return
+                    k += 1
+            pygame.display.flip()
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 exit()
@@ -120,6 +156,7 @@ def process_game(lvl, x, y):
             screen.blit(e.image, camera.apply(e))
         pygame.display.flip()
         clock.tick(FPS)
+        # print(game_parametrs.level[0])
 
 # if __name__ == '__main__':
 #     process_game()

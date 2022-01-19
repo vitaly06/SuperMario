@@ -318,3 +318,19 @@ def draw(screen, width, height, lvl):
     screen.blit(title, (title_x1, title_y1))
 
 
+def game_over(screen):
+    restart = pygame.sprite.Sprite()
+    restart.image = pygame.transform.scale(load_image("restart.png"), (400, 120))
+    restart.rect.x = 300
+    restart.rect.y = 150
+    go_to_level_menu = pygame.sprite.Sprite()
+    go_to_level_menu.image = pygame.transform.scale(load_image("restart.png"), (400, 120))
+    go_to_level_menu.rect.x = 300
+    go_to_level_menu.rect.y = 360
+    drawing = pygame.sprite.Group()
+    drawing.add(restart)
+    drawing.add(go_to_level_menu)
+    drawing.draw(screen)
+
+
+
