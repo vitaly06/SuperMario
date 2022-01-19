@@ -3,7 +3,7 @@ import pygame
 import game_parametrs
 from constants import *
 from player import Player
-from blocks import Platform, LuckyBox, BlockDie, Door
+from blocks import Platform, BlockDie, Door
 
 
 def check(name):
@@ -13,6 +13,7 @@ def check(name):
             i = i.split(":")
             all_players[i[0]] = int(i[1])
     return all_players[name]
+
 
 class Camera(object):
     def __init__(self, camera_func, width, height):
@@ -43,6 +44,7 @@ def process_game(lvl, x, y):
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
     pygame.display.set_caption('Super Mario')
+    bg = pygame.image.load("data/fon.png")
 
     running = True
     clock = pygame.time.Clock()
@@ -65,10 +67,6 @@ def process_game(lvl, x, y):
                 pf = Platform(x, y, 'data/snow_block.jpg')
                 entities.add(pf)
                 platforms.append(pf)
-            if col == '?':
-                lb = LuckyBox(x, y)
-                entities.add(lb)
-                platforms.append(lb)
             if col == "*":
                 bd = BlockDie(x, y, "data/dieBlock.png")
                 entities.add(bd)
@@ -88,7 +86,8 @@ def process_game(lvl, x, y):
     total_level_height = len(level) * PLATFORM_HEIGHT  # высоту
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while running:
-        screen.fill(pygame.Color('green'))
+        #screen.fill(pygame.image.load('data/fon.png'))
+        screen.blit(bg, (0, 0))
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 exit()

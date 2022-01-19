@@ -1,2 +1,3 @@
 dema: 2 
 god: 2 
+dema good: 2 
