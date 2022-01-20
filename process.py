@@ -16,7 +16,7 @@ def check(name):
     return all_players[name]
 
 
-class Camera(object):
+class Camera(object):  # камера
     def __init__(self, camera_func, width, height):
         self.camera_func = camera_func
         self.state = pygame.Rect(0, 0, width, height)
@@ -33,10 +33,10 @@ def camera_configure(camera, target_rect):
     _, _, w, h = camera
     l, t = -l + WIDTH / 2, -t + HEIGHT / 2
 
-    l = min(0, l)  # Не движемся дальше левой границы
-    l = max(-(camera.width - WIDTH), l)  # Не движемся дальше правой границы
-    t = max(-(camera.height - HEIGHT), t)  # Не движемся дальше нижней границы
-    t = min(0, t)  # Не движемся дальше верхней границы
+    l = min(0, l)
+    l = max(-(camera.width - WIDTH), l)
+    t = max(-(camera.height - HEIGHT), t)
+    t = min(0, t)
 
     return pygame.Rect(l, t, w, h)
 
@@ -57,10 +57,10 @@ def process_game(lvl, x, y):
     entities.add(player)
     level = LEVELS[lvl]  # получаем уровень игрока
     x = y = 0  # координаты
-    for row in level:  # вся строка
-        for col in row:  # каждый символ
+    # отрисовка уровня
+    for row in level:
+        for col in row:
             if col == "-" and lvl != 3:
-                # создаем блок, заливаем его цветом и рисеум его
                 pf = Platform(x, y, 'data/platform.png')
                 entities.add(pf)
                 platforms.append(pf)
@@ -84,11 +84,11 @@ def process_game(lvl, x, y):
                 door = Door(x, y - 32, 'data/door.png')
                 entities.add(door)
                 platforms.append(door)
-            x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
-        y += PLATFORM_HEIGHT  # то же самое и с высотой
+            x += PLATFORM_WIDTH
+        y += PLATFORM_HEIGHT
         x = 0
-    total_level_width = len(level[0]) * PLATFORM_WIDTH  # Высчитываем фактическую ширину уровня
-    total_level_height = len(level) * PLATFORM_HEIGHT  # высоту
+    total_level_width = len(level[0]) * PLATFORM_WIDTH  # ширина уровня
+    total_level_height = len(level) * PLATFORM_HEIGHT  # высота
     camera = Camera(camera_configure, total_level_width, total_level_height)
     while running:
         print(game_parametrs.game_over)

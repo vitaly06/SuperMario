@@ -12,17 +12,17 @@ class Player(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.image = pygame.image.load('data/0.png')
-        self.rect = pygame.Rect(x, y, 22, 32)  # прямоугольный объект
-        self.speed_y = 0  # вертикальная скорость
-        self.onGround = False  # находится ли игрок на земле
-        self.image.set_colorkey(pygame.Color(COLOR))  # делаем фон прозрачным
-        #        Анимация движения вправо
+        self.rect = pygame.Rect(x, y, 22, 32)
+        self.speed_y = 0
+        self.onGround = False  # нахождение на земле
+        self.image.set_colorkey(pygame.Color(COLOR))  # прозрачный фон
+        # right
         boltAnim = []
         for anim in ANIMATION_RIGHT:
             boltAnim.append((anim, ANIMATION_DELAY))
         self.boltAnimRight = pyganim.PygAnimation(boltAnim)
         self.boltAnimRight.play()
-        #        Анимация движения влево
+        # left
         boltAnim = []
         for anim in ANIMATION_LEFT:
             boltAnim.append((anim, ANIMATION_DELAY))
@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
 
         self.boltAnimStay = pyganim.PygAnimation(ANIMATION_STAY)
         self.boltAnimStay.play()
-        self.boltAnimStay.blit(self.image, (0, 0))  # По-умолчанию, стоим
+        self.boltAnimStay.blit(self.image, (0, 0))
 
         self.boltAnimJumpLeft = pyganim.PygAnimation(ANIMATION_JUMP_LEFT)
         self.boltAnimJumpLeft.play()
@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
         if left:
             self.speed = -SPEED
             self.image.fill(pygame.Color(COLOR))
-            if up:  # для прыжка влево есть отдельная анимация
+            if up:
                 self.boltAnimJumpLeft.blit(self.image, (0, 0))
             else:
                 self.boltAnimLeft.blit(self.image, (0, 0))
@@ -77,22 +77,22 @@ class Player(pygame.sprite.Sprite):
 
     def collide(self, speed_x, speed_y, platforms):
         for p in platforms:
-            if pygame.sprite.collide_rect(self, p):  # если есть пересечение платформы с игроком
-                if speed_x > 0:  # если движется вправо
-                    self.rect.right = p.rect.left  # то не движется вправо
-                if speed_x < 0:  # если движется влево
-                    self.rect.left = p.rect.right  # то не движется влево
-                if speed_y > 0:  # если падает вниз
-                    self.rect.bottom = p.rect.top  # то не падает вниз
-                    self.onGround = True  # и становится на что-то твердое
-                    self.speed_y = 0  # и энергия падения пропадает
-                if speed_y < 0:  # если движется вверх
-                    self.rect.top = p.rect.bottom  # то не движется вверх
-                    self.speed_y = 0  # и энергия прыжка пропадает
-                if isinstance(p, blocks.BlockDie):  # если пересакаемый блок - blocks.BlockDie
+            if pygame.sprite.collide_rect(self, p):  # пересечение платформы и игрока
+                if speed_x > 0:
+                    self.rect.right = p.rect.left
+                if speed_x < 0:
+                    self.rect.left = p.rect.right
+                if speed_y > 0:
+                    self.rect.bottom = p.rect.top
+                    self.onGround = True
+                    self.speed_y = 0
+                if speed_y < 0:
+                    self.rect.top = p.rect.bottom
+                    self.speed_y = 0
+                if isinstance(p, blocks.BlockDie):  # пересечение с колючками
                     self.die()
 
-                elif isinstance(p, blocks.Door):
+                elif isinstance(p, blocks.Door):  # дверь для прохождения уровня
                     level = game_parametrs.level[0]
                     print(level)
                     all_players = dict()
@@ -113,7 +113,7 @@ class Player(pygame.sprite.Sprite):
 
     def die(self):
         # pygame.time.wait(500)
-        # self.teleporting(self.x, self.y)  # перемещаемся в начальные координаты
+        # self.teleporting(self.x, self.y)
         game_parametrs.game_over = True
 
     def teleporting(self, goX, goY):
