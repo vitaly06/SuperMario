@@ -9,8 +9,8 @@ screen = pygame.display.set_mode(size)
 all_icons = pygame.sprite.Group()
 pygame.display.set_caption('Super Mario')
 level_text = list()
-# pygame.mixer.music.load('data\main_music.mp3')
-# pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.load('data\main_music.mp3')
+pygame.mixer.music.play(loops=-1)
 # sound = pygame.mixer.Sound("main_music.mp3")
 
 
